@@ -4,13 +4,14 @@ package com.alex_kozlov.spring.mvc;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/employee")
+//@RequestMapping("/employee")
 public class MyController {
 
     @RequestMapping("/")
@@ -19,9 +20,12 @@ public class MyController {
     }
 
     @RequestMapping("/askDetails")
-    public String askEmployeeDetails() {
+    public String askEmployeeDetails(Model model) {
+        model.addAttribute("employee", new Employee());
         return "ask-employee-details-view";
     }
+
+
 //    @RequestMapping("showDetails")
 //    public String showEmployeeDetails() {
 //        return "show-employee-details-view";
@@ -38,17 +42,29 @@ public class MyController {
 //        return "show-employee-details-view";
 //    }
 
+
     @RequestMapping("showDetails")
-    public String showEmployeeDetails(@RequestParam("employeeName") String empName, Model model) {
+    public String showEmployeeDetails(@ModelAttribute("employee") Employee employee) {
 
-
-        empName = "Mr. " + empName;
-
-        model.addAttribute("attributeName", empName);
-        model.addAttribute("description", "Dreamer");
+        String name = employee.getName();
+        employee.setName("Mr. " + name);
 
         return "show-employee-details-view";
     }
+
+
+
+//    @RequestMapping("showDetails")
+//    public String showEmployeeDetails(@RequestParam("employeeName") String empName, Model model) {
+//
+//
+//        empName = "Mr. " + empName;
+//
+//        model.addAttribute("attributeName", empName);
+//        model.addAttribute("description", "Dreamer");
+//
+//        return "show-employee-details-view";
+//    }
 
 
 
