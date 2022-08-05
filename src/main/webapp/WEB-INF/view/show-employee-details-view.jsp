@@ -29,6 +29,10 @@ Your language(s):
 
 
   </ul>
+<br>
+Your PhoneNumber: ${employee.phoneNumber}
+<br>
+Your Email: ${employee.email}
 
 </body>
 </html>
